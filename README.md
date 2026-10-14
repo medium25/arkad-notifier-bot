@@ -1,9 +1,9 @@
-# Telegram-релей — общий эндпоинт для всех проектов
+# arkad-notifier-bot — Telegram-бот и общий эндпоинт уведомлений
 
-Отдельный standalone Google Apps Script Web App. Не привязан к CRM или её
+Отдельный standalone Google Apps Script Web App. Не привязан к CRM или
 Firebase-проекту — просто HTTP-эндпоинт, который принимает `{apiKey,
 channel, text}` и шлёт сообщение в Telegram от имени одного бота. Любой
-твой проект (эта CRM, другой Apps Script, Node-скрипт, cron, curl) может
+твой проект (CRM, другой Apps Script, Node-скрипт, cron, curl) может
 слать сюда, зная только свой `apiKey` и имя канала — токен бота и
 Telegram-ID групп/топиков видит только этот проект.
 
@@ -16,7 +16,7 @@ script.google.com — вручную (или `clasp push`, если настро
 
 Если бота ещё нет — в Telegram напиши [@BotFather](https://t.me/BotFather)
 → `/newbot`, получишь токен вида `123456:AAH...`. Можно переиспользовать
-бота, уже сделанного для CRM (`appsscript/README.md`) — один бот спокойно
+уже существующего бота — один бот спокойно
 шлёт в разные группы/топики, ничего заводить заново не обязательно.
 
 ### 2. Новый проект Apps Script
@@ -59,7 +59,7 @@ UI, только через код), например:
 setChannel('reports', '-1001234567890', 12);
 ```
 
-Как узнать `chatId`/`threadId` топика — то же самое, что для CRM:
+Как узнать `chatId`/`threadId` топика — так:
 1. Добавь бота в группу с включёнными темами (Group settings → Topics).
 2. Напиши сообщение в нужный топик.
 3. Открой `https://api.telegram.org/bot<TOKEN>/getUpdates` в браузере —
@@ -111,7 +111,7 @@ Content-Type: application/json
 в теле: `{"status": 200, "data": {"sent": true}}` или `{"status": 4xx,
 "error": "..."}`.
 
-Пример из Node (как в `appsscript/scripts/*.mjs` этого репозитория):
+Пример из Node:
 
 ```js
 await fetch('https://script.google.com/macros/s/AKfycb.../exec', {
